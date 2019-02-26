@@ -2,39 +2,15 @@
 
 const fs   = require( 'fs' );
 const path = require( 'path' );
-const util = require( 'util' );
 
 const { RTMClient } = require( '@slack/client' );
 
-const config = require( '../config.json' );
+const lib = require( '../lib' );
 
-[ 'token', 'logPath' ].forEach( key => {
-	if ( ! config[ key ] )  {
-		throw new Error( util.format(
-			'Config key missing: "%s"',
-			key
-		) );
-	}
-} );
+const config = lib.loadConfig();
 
-if (
-	! fs.existsSync( config.logPath ) ||
-	! fs.statSync( config.logPath ).isDirectory()
-) {
-	throw new Error( util.format(
-		'"logPath" must be a directory: %s',
-		config.logPath
-	) );
-}
 // Confirm write access
 fs.accessSync( config.logPath, fs.constants.W_OK );
-
-// https://github.com/nodejs/node/issues/17871 :(
-// process.throwDeprecation = true;
-process.on( 'unhandledRejection', err => {
-	console.error( 'Unhandled promise rejection:', err );
-	process.exit( 1 );
-} );
 
 let currentLogFile = null;
 let currentHour = null;
