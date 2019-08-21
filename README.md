@@ -5,6 +5,7 @@ private channels.
 
 Each essential function is performed by a separate script file:
 
+- Archive all visible messages to newline-delimited JSON files
 - Use the
   [Slack RTM API](https://api.slack.com/rtm)
   to log events to newline-delimited JSON files as they happen
