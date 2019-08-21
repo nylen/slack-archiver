@@ -45,9 +45,9 @@ file per hour (using the format `YYYY-MM/YYYY-MM-DD_HH.log`).
 ## Archiving files
 
 Run `bin/download-files.js`.  This script will process all the JSON log files
-saved by `bin/log-events.js`, look for files, and download them (along with
-their metadata from the Slack API) to the `fileStoragePath` directory specified
-in the config file.
+saved by `bin/log-events.js` and `bin/log-history.js`, look for files, and
+download them (along with their metadata from the Slack API) to the
+`fileStoragePath` directory specified in the config file.
 
 Currently you must run this script every time you want to download new files.
 This may be improved in the future.

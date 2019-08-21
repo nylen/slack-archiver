@@ -128,9 +128,18 @@ const fileStore = new ResourceStore(
 );
 
 lib.processHistory( async event => {
-	if ( event.file_id ) {
+	const fileIds = [];
+	if ( event.file_id ) { // real-time via bin/log-events.js
+		fileIds.push( event.file_id );
+	}
+	if ( event.files ) { // history via bin/log-history.js
+		for ( const file of event.files ) {
+			fileIds.push( file.id );
+		}
+	}
+	for ( const fileId of fileIds ) {
 		await new Promise( ( resolve, reject ) => {
-			fileStore.get( event.file_id, ( err, value, extra ) => {
+			fileStore.get( fileId, ( err, value, extra ) => {
 				if ( err ) {
 					reject( err );
 				} else {
