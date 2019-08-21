@@ -33,7 +33,7 @@ const fileStore = new ResourceStore(
 		}
 
 		const fileUrl = info.file.url_private;
-		let saveFilename = null;
+		info.saveFilename = null;
 
 		if ( info.file.mode === 'snippet' ) {
 			// This is a Slack snippet, shared inline; the full content should
@@ -64,15 +64,15 @@ const fileStore = new ResourceStore(
 			cb( null, info );
 			return;
 
-		} else if ( info.file.mode === 'space' ) {
+		} else if ( info.file.mode === 'space' || info.file.mode === 'docs' ) {
 			// This is a Slack post.  The 'name' property is the name of the
 			// post, and the downloadable file content is a JSON representation
 			// of the post.
-			saveFilename = extra.baseFilename + '.post.json';
+			info.saveFilename = extra.baseFilename + '.post.json';
 
 		} else if ( info.file.mode === 'hosted' ) {
 			// This is a "normal" posted file.
-			saveFilename = extra.baseFilename + path.extname( info.file.name );
+			info.saveFilename = extra.baseFilename + path.extname( info.file.name );
 
 		} else {
 			console.log( info );
@@ -116,7 +116,7 @@ const fileStore = new ResourceStore(
 				throw new Error( 'HTTP ' + res.statusCode );
 			}
 
-			const savePath = path.join( fileStorePath, saveFilename );
+			const savePath = path.join( fileStorePath, info.saveFilename );
 			fs.mkdirSync( path.dirname( savePath ), { recursive: true } );
 			res.pipe( fs.createWriteStream( savePath ) )
 				.on( 'error', err => { throw err; } )
