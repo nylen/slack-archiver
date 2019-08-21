@@ -1,5 +1,6 @@
 {
 	"token": "xoxb-etc",
 	"logPath": "/path/to/logs",
+	"historyPath": "/path/to/historical-logs",
 	"fileStoragePath": "/path/to/files"
 }

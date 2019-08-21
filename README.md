@@ -22,7 +22,17 @@ received messages.
 - Copy `sample-config.json` to `config.json` and fill in the values.
 - Run `npm install`.
 
-## Archiving messages
+## Archiving message history
+
+Run `bin/log-history.js`.  This script will archive all message history that is
+currently visible to the user associated with the token, subject to the 10,000
+message limit for the free Slack plan.
+
+This script saves a set of newline-delimited JSON log files under the
+`historyPath` directory specified in the config file, with one subdirectory per
+month and one file per hour (using the format `YYYY-MM/YYYY-MM-DD_HH.log`).
+
+## Archiving messages in realtime
 
 Run `bin/log-events.js`.  This script will connect to the Slack API and listen
 for events.  It will try to reconnect if it gets disconnected, but you are
