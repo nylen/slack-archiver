@@ -5,7 +5,7 @@ const https = require( 'https' );
 const path  = require( 'path' );
 
 const ResourceStore = require( 'resource-store' );
-const { WebClient } = require( '@slack/client' );
+const { WebClient } = require( '@slack/web-api' );
 
 const lib = require( '../lib' );
 

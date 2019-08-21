@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@slack/client": "^4.8.0",
+    "@slack/rtm-api": "^5.0.2",
     "@slack/web-api": "^5.1.0",
     "dayjs": "^1.8.15",
     "resource-store": "^0.1.0",

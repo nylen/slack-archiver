@@ -2,7 +2,7 @@
 
 const fs = require( 'fs' );
 
-const { RTMClient } = require( '@slack/client' );
+const { RTMClient } = require( '@slack/rtm-api' );
 
 const lib = require( '../lib' );
 
